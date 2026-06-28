@@ -22,7 +22,7 @@ export default function Hub() {
           </p>
           <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'center' }}>
             <img 
-              src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgeneral-multi-tools.vercel.app&count_bg=%233b82f6&title_bg=%231e40af&title=Visits+(Today+%2F+Total)&edge_flat=false" 
+              src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgeneral-multi-tools.vercel.app&count_bg=%233b82f6&title_bg=%231e40af&title=Visits&edge_flat=false" 
               alt="Visitor Badge" 
               style={{ borderRadius: '4px', height: '24px' }}
             />
