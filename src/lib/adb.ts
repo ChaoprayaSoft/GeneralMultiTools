@@ -31,7 +31,7 @@ export async function connectToAdb(device: AdbWebUsbBackend): Promise<Adb> {
   
   const transport = await AdbDaemonTransport.authenticate({
     serial: device.serial,
-    connection,
+    connection: connection as any,
     credentialStore,
     initialDelayedAckBytes: 0, // Disable delayed ack which can cause >32MB buffer requests on some Honor devices
   });
