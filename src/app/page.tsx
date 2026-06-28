@@ -20,18 +20,6 @@ export default function Hub() {
           <p className={styles.description}>
             A growing collection of powerful, browser-based utilities built with modern web technologies. No installation required.
           </p>
-          <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'center', gap: '0.5rem' }}>
-            <img 
-              src="https://komarev.com/ghpvc/?username=chaopraya-gmt-total&color=3b82f6&style=flat-square&label=TOTAL+VISITS" 
-              alt="Total Visits" 
-              style={{ borderRadius: '4px', height: '24px' }}
-            />
-            <img 
-              src="https://komarev.com/ghpvc/?username=chaopraya-gmt-unique&color=1e40af&style=flat-square&label=UNIQUE+VISITORS" 
-              alt="Unique Visitors" 
-              style={{ borderRadius: '4px', height: '24px' }}
-            />
-          </div>
         </div>
 
         <div className={styles.grid}>
@@ -87,6 +75,19 @@ export default function Hub() {
               <span>Daily Use</span>
             </div>
           </Link>
+        </div>
+
+        <div style={{ marginTop: '3rem', paddingBottom: '2rem', display: 'flex', justifyContent: 'center', gap: '0.5rem' }}>
+          <img 
+            src="https://komarev.com/ghpvc/?username=chaopraya-gmt-total&color=3b82f6&style=flat-square&label=TOTAL+VISITS" 
+            alt="Total Visits" 
+            style={{ borderRadius: '4px', height: '24px' }}
+          />
+          <img 
+            src="https://komarev.com/ghpvc/?username=chaopraya-gmt-unique&color=1e40af&style=flat-square&label=UNIQUE+VISITORS" 
+            alt="Unique Visitors" 
+            style={{ borderRadius: '4px', height: '24px' }}
+          />
         </div>
       </main>
     </div>
