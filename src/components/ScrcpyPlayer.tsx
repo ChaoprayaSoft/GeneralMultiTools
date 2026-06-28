@@ -27,13 +27,13 @@ export default function ScrcpyPlayer({ adb }: ScrcpyPlayerProps) {
         if (!response.body) throw new Error("Could not fetch scrcpy-server.jar");
 
         // Convert DOM ReadableStream to YumeChan ReadableStream
-        const webStream = new ReadableStream({
+        const webStream = new ReadableStream<Uint8Array>({
           async start(controller) {
             const reader = response.body!.getReader();
             while (true) {
               const { done, value } = await reader.read();
               if (done) break;
-              controller.enqueue(value);
+              controller.enqueue(value as Uint8Array);
             }
             controller.close();
           }
