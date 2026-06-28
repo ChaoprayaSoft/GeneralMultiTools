@@ -22,7 +22,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={spaceGrotesk.variable}>
-      <body>{children}</body>
+      <body style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <div style={{ flex: 1 }}>{children}</div>
+        <footer style={{ 
+          background: 'var(--footer)', 
+          color: '#fff', 
+          textAlign: 'center', 
+          padding: '1.5rem', 
+          fontSize: '0.9rem',
+          fontWeight: 500,
+          borderTop: '2px solid var(--border)'
+        }}>
+          © 2026 ChaoprayaSoft, THAILAND | Contact : tiawongsombat@gmail.com | Tel : 0909739266 | LineID : yok_tiaw
+        </footer>
+      </body>
     </html>
   );
 }

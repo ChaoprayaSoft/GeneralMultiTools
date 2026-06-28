@@ -1,14 +1,16 @@
 :root {
-  --background: #0f0f11;
-  --surface: rgba(255, 255, 255, 0.05);
-  --surface-hover: rgba(255, 255, 255, 0.1);
-  --surface-border: rgba(255, 255, 255, 0.1);
-  --primary: #b48eed; /* Electric Lavender */
-  --primary-hover: #c4a6f2;
-  --secondary: #c8ff00; /* Acid Green */
-  --text-primary: #ffffff;
-  --text-secondary: #a0a0a0;
-  --error: #ff3366;
+  --background: #f9fafb;
+  --body: #f3f4f6;
+  --surface: #ffffff;
+  --surface-hover: #f3f4f6;
+  --surface-border: #d1d5db;
+  --primary: #6b7280; /* accent */
+  --primary-hover: #4b5563;
+  --secondary: #374151; /* navigation */
+  --text-primary: #0f172a;
+  --text-secondary: rgba(15, 23, 42, 0.7);
+  --footer: #111827;
+  --border: #d1d5db;
   
   --radius-lg: 24px;
   --radius-md: 12px;
