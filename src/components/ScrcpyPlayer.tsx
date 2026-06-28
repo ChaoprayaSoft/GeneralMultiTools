@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { Adb } from "@yume-chan/adb";
 import { AdbScrcpyClient, AdbScrcpyOptions2_4 } from "@yume-chan/adb-scrcpy";
 import { ScrcpyVideoCodecId } from "@yume-chan/scrcpy";
-import { WebCodecsDecoder } from "@yume-chan/scrcpy-decoder-webcodecs";
 import { ReadableStream } from "@yume-chan/stream-extra";
 
 interface ScrcpyPlayerProps {
