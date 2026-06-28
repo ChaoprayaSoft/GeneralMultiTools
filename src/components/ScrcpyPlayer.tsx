@@ -101,20 +101,73 @@ export default function ScrcpyPlayer({ adb }: ScrcpyPlayerProps) {
     };
   }, [adb]);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      containerRef.current?.requestFullscreen().catch(err => {
+        console.error("Error attempting to enable full-screen mode:", err);
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
       {status && <div style={{ marginBottom: '1rem', color: 'var(--text-secondary)' }}>{status}</div>}
-      <canvas 
-        ref={canvasRef} 
+      
+      <div 
+        ref={containerRef}
         style={{ 
-          background: '#000', 
-          borderRadius: '12px', 
-          maxWidth: '100%', 
-          maxHeight: '75vh',
+          position: 'relative',
+          display: status ? 'none' : 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          height: '100%',
+          background: '#000',
+          borderRadius: '12px',
           boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
-          display: status ? 'none' : 'block'
-        }} 
-      />
+          overflow: 'hidden'
+        }}
+      >
+        <canvas 
+          ref={canvasRef} 
+          style={{ 
+            maxWidth: '100%', 
+            maxHeight: '100%',
+            objectFit: 'contain'
+          }} 
+        />
+        
+        {!status && (
+          <button 
+            onClick={toggleFullscreen}
+            style={{
+              position: 'absolute',
+              bottom: '1rem',
+              right: '1rem',
+              background: 'rgba(255, 255, 255, 0.2)',
+              border: 'none',
+              borderRadius: '8px',
+              padding: '0.5rem',
+              color: 'white',
+              cursor: 'pointer',
+              backdropFilter: 'blur(4px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 10
+            }}
+            title="Toggle Fullscreen"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+            </svg>
+          </button>
+        )}
+      </div>
     </div>
   );
 }
