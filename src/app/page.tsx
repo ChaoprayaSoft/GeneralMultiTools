@@ -6,7 +6,7 @@ export default function Hub() {
     <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.logo}>
-          <img src="/icon.svg" alt="Icon" width={32} height={32} />
+          <img src="/icon.svg" alt="Icon" width={48} height={48} />
           <span>General <span className="text-gradient">multi tools</span></span>
         </div>
       </header>
