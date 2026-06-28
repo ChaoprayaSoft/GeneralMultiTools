@@ -22,12 +22,12 @@ export default function Hub() {
           </p>
           <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'center', gap: '0.5rem' }}>
             <img 
-              src="https://komarev.com/ghpvc/?username=chaoprayasoft.general-multi-tools.total&color=3b82f6&style=flat-square&label=TOTAL+VISITS" 
+              src="https://komarev.com/ghpvc/?username=chaopraya-gmt-total&color=3b82f6&style=flat-square&label=TOTAL+VISITS" 
               alt="Total Visits" 
               style={{ borderRadius: '4px', height: '24px' }}
             />
             <img 
-              src="https://komarev.com/ghpvc/?username=chaoprayasoft.general-multi-tools.unique&color=1e40af&style=flat-square&label=UNIQUE+VISITORS" 
+              src="https://komarev.com/ghpvc/?username=chaopraya-gmt-unique&color=1e40af&style=flat-square&label=UNIQUE+VISITORS" 
               alt="Unique Visitors" 
               style={{ borderRadius: '4px', height: '24px' }}
             />
