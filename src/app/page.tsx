@@ -20,10 +20,15 @@ export default function Hub() {
           <p className={styles.description}>
             A growing collection of powerful, browser-based utilities built with modern web technologies. No installation required.
           </p>
-          <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'center' }}>
+          <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'center', gap: '0.5rem' }}>
             <img 
-              src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgeneral-multi-tools.vercel.app&count_bg=%233b82f6&title_bg=%231e40af&title=Visits&edge_flat=false" 
-              alt="Visitor Badge" 
+              src="https://komarev.com/ghpvc/?username=chaoprayasoft.general-multi-tools.total&color=3b82f6&style=flat-square&label=TOTAL+VISITS" 
+              alt="Total Visits" 
+              style={{ borderRadius: '4px', height: '24px' }}
+            />
+            <img 
+              src="https://komarev.com/ghpvc/?username=chaoprayasoft.general-multi-tools.unique&color=1e40af&style=flat-square&label=UNIQUE+VISITORS" 
+              alt="Unique Visitors" 
               style={{ borderRadius: '4px', height: '24px' }}
             />
           </div>
