@@ -20,6 +20,13 @@ export default function Hub() {
           <p className={styles.description}>
             A growing collection of powerful, browser-based utilities built with modern web technologies. No installation required.
           </p>
+          <div style={{ marginTop: '1.5rem' }}>
+            <img 
+              src="https://visitor-badge.laobi.icu/badge?page_id=chaoprayasoft.general-multi-tools" 
+              alt="Visitor Badge" 
+              style={{ borderRadius: '4px' }}
+            />
+          </div>
         </div>
 
         <div className={styles.grid}>
