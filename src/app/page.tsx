@@ -37,24 +37,44 @@ export default function Hub() {
             </div>
           </Link>
 
-          {/* Placeholder for future tools */}
-          <div className={`glass ${styles.card} ${styles.comingSoon}`}>
+          <Link href="/color-picker" className={`glass ${styles.card}`}>
             <div className={styles.cardHeader}>
-              <div className={styles.cardIcon}>🎵</div>
-              <span className={styles.statusBadge} style={{ background: '#333', color: '#888' }}>Coming Soon</span>
+              <div className={styles.cardIcon}>🎨</div>
+              <span className={styles.statusBadge}>Active</span>
             </div>
-            <h2>Audio Forge</h2>
-            <p>Advanced browser-based audio editing and mixing utilizing WebAudio APIs.</p>
-          </div>
+            <h2>Color Picker & Extractor</h2>
+            <p>Interactive color wheel and local image pixel extraction. Outputs to HEX, RGB, and HSL instantly.</p>
+            <div className={styles.tags}>
+              <span>Canvas API</span>
+              <span>Design</span>
+            </div>
+          </Link>
           
-          <div className={`glass ${styles.card} ${styles.comingSoon}`}>
+          <Link href="/binary-calc" className={`glass ${styles.card}`}>
             <div className={styles.cardHeader}>
-              <div className={styles.cardIcon}>🔒</div>
-              <span className={styles.statusBadge} style={{ background: '#333', color: '#888' }}>Coming Soon</span>
+              <div className={styles.cardIcon}>🔢</div>
+              <span className={styles.statusBadge}>Active</span>
             </div>
-            <h2>Secure Vault</h2>
-            <p>Client-side encryption tool for safely sharing passwords and sensitive documents.</p>
-          </div>
+            <h2>Binary Calculator</h2>
+            <p>Convert between Decimal, Binary, Octal, and Hex. Perform binary arithmetic including fractional values.</p>
+            <div className={styles.tags}>
+              <span>Math</span>
+              <span>Computer Science</span>
+            </div>
+          </Link>
+
+          <Link href="/unit-converter" className={`glass ${styles.card}`}>
+            <div className={styles.cardHeader}>
+              <div className={styles.cardIcon}>⚖️</div>
+              <span className={styles.statusBadge}>Active</span>
+            </div>
+            <h2>Unit Converter</h2>
+            <p>Universal measurement converter for Length, Volume, and Mass. Accurate up to 6 decimal places.</p>
+            <div className={styles.tags}>
+              <span>Utility</span>
+              <span>Daily Use</span>
+            </div>
+          </Link>
         </div>
       </main>
     </div>
