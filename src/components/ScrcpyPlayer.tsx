@@ -103,6 +103,16 @@ export default function ScrcpyPlayer({ adb }: ScrcpyPlayerProps) {
 
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
       containerRef.current?.requestFullscreen().catch(err => {
@@ -127,8 +137,8 @@ export default function ScrcpyPlayer({ adb }: ScrcpyPlayerProps) {
           width: '100%',
           height: '100%',
           background: '#000',
-          borderRadius: '12px',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+          borderRadius: isFullscreen ? '0' : '12px',
+          boxShadow: isFullscreen ? 'none' : '0 8px 32px rgba(0,0,0,0.5)',
           overflow: 'hidden'
         }}
       >
@@ -148,23 +158,40 @@ export default function ScrcpyPlayer({ adb }: ScrcpyPlayerProps) {
               position: 'absolute',
               bottom: '1rem',
               right: '1rem',
-              background: 'rgba(255, 255, 255, 0.2)',
-              border: 'none',
+              background: 'rgba(0, 0, 0, 0.5)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
               borderRadius: '8px',
-              padding: '0.5rem',
+              padding: '0.5rem 1rem',
               color: 'white',
               cursor: 'pointer',
-              backdropFilter: 'blur(4px)',
+              backdropFilter: 'blur(8px)',
               display: 'flex',
               alignItems: 'center',
+              gap: '0.5rem',
               justifyContent: 'center',
-              zIndex: 10
+              zIndex: 10,
+              transition: 'opacity 0.2s',
+              opacity: isFullscreen ? 0.3 : 1
             }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = '1')}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = isFullscreen ? '0.3' : '1')}
             title="Toggle Fullscreen"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
-            </svg>
+            {isFullscreen ? (
+              <>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path>
+                </svg>
+                <span>Exit Fullscreen</span>
+              </>
+            ) : (
+              <>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                </svg>
+                <span>Fullscreen</span>
+              </>
+            )}
           </button>
         )}
       </div>
