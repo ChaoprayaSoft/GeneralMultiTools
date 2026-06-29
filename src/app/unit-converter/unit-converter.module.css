@@ -45,6 +45,7 @@
 .tabs {
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
   border-bottom: 2px solid var(--surface-border);
   padding-bottom: 1rem;
 }
@@ -126,5 +127,9 @@
     text-align: center;
     margin-top: 0;
     transform: rotate(90deg);
+  }
+  .tab {
+    flex: 1 1 100%;
+    text-align: center;
   }
 }
