@@ -75,7 +75,7 @@ export default function CurrencyExchange() {
       <header className={styles.header}>
         <h1 className={styles.title}>Currency <span className="text-gradient">Exchange</span></h1>
         <p className={styles.subtitle}>Real-time, up-to-date foreign exchange rates.</p>
-        <Link href="/" style={{ color: 'var(--accent-primary)', marginTop: '1rem', display: 'inline-block', textDecoration: 'none' }}>
+        <Link href="/" style={{ color: 'var(--primary)', marginTop: '1rem', display: 'inline-block', textDecoration: 'none' }}>
           &larr; Back to Hub
         </Link>
       </header>

@@ -77,7 +77,7 @@ export default function DictionaryTranslator() {
       <header className={styles.header}>
         <h1 className={styles.title}>Translate & <span className="text-gradient">Dictionary</span></h1>
         <p className={styles.subtitle}>Translate sentences instantly and listen to their pronunciation.</p>
-        <Link href="/" style={{ color: 'var(--accent-primary)', marginTop: '1rem', display: 'inline-block', textDecoration: 'none' }}>
+        <Link href="/" style={{ color: 'var(--primary)', marginTop: '1rem', display: 'inline-block', textDecoration: 'none' }}>
           &larr; Back to Hub
         </Link>
       </header>
