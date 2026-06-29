@@ -15,7 +15,7 @@ const LANGUAGES: Language[] = [
   { code: 'th', name: 'Thai', ttsCode: 'th-TH' },
   { code: 'ko', name: 'Korean', ttsCode: 'ko-KR' },
   { code: 'ja', name: 'Japanese', ttsCode: 'ja-JP' },
-  { code: 'zh-CN', name: 'Chinese (Simplified)', ttsCode: 'zh-CN' },
+  { code: 'zh', name: 'Chinese (Simplified)', ttsCode: 'zh-CN' },
 ];
 
 export default function DictionaryTranslator() {
@@ -33,15 +33,15 @@ export default function DictionaryTranslator() {
     setError(null);
     try {
       const response = await fetch(
-        `https://api.mymemory.translated.net/get?q=${encodeURIComponent(sourceText)}&langpair=${sourceLang}|${targetLang}`
+        `https://lingva.ml/api/v1/${sourceLang}/${targetLang}/${encodeURIComponent(sourceText)}`
       );
       if (!response.ok) throw new Error("Translation failed");
       
       const data = await response.json();
-      if (data.responseStatus === 200) {
-        setTargetText(data.responseData.translatedText);
+      if (data.translation) {
+        setTargetText(data.translation);
       } else {
-        setError(data.responseDetails || "Translation error");
+        setError(data.error || "Translation error");
       }
     } catch (err) {
       setError("Failed to fetch translation. Please try again.");

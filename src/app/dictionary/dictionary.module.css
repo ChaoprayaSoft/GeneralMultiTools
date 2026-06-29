@@ -125,22 +125,24 @@
   position: absolute;
   bottom: 1rem;
   right: 1rem;
-  background: rgba(59, 130, 246, 0.2);
-  border: 1px solid rgba(59, 130, 246, 0.5);
+  background: var(--primary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--primary);
+  color: #ffffff;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .audioButton:hover {
-  background: rgba(59, 130, 246, 0.4);
-  transform: scale(1.05);
+  background: var(--primary-hover);
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.5);
 }
 
 .audioButton:disabled {
