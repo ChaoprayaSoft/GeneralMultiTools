@@ -75,17 +75,38 @@ export default function Hub() {
               <span>Daily Use</span>
             </div>
           </Link>
+
+          <Link href="/currency-exchange" className={`glass ${styles.card}`}>
+            <div className={styles.cardHeader}>
+              <div className={styles.cardIcon}>💱</div>
+              <span className={styles.statusBadge}>Active</span>
+            </div>
+            <h2>Currency Exchange</h2>
+            <p>Real-time foreign exchange rates. Fast and reliable currency conversion.</p>
+            <div className={styles.tags}>
+              <span>Finance</span>
+              <span>Utility</span>
+            </div>
+          </Link>
+
+          <Link href="/dictionary" className={`glass ${styles.card}`}>
+            <div className={styles.cardHeader}>
+              <div className={styles.cardIcon}>🌐</div>
+              <span className={styles.statusBadge}>Active</span>
+            </div>
+            <h2>Translate & Audio</h2>
+            <p>Translate sentences across multiple languages and listen to native pronunciations.</p>
+            <div className={styles.tags}>
+              <span>Language</span>
+              <span>Audio</span>
+            </div>
+          </Link>
         </div>
 
         <div style={{ marginTop: '3rem', paddingBottom: '2rem', display: 'flex', justifyContent: 'center', gap: '0.5rem' }}>
           <img 
-            src="https://komarev.com/ghpvc/?username=chaopraya-gmt-total&color=3b82f6&style=flat-square&label=TOTAL+VISITS" 
+            src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fchaopraya-gmt.com%2Ftotal&count_bg=%233b82f6&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=TOTAL+VISITS&edge_flat=true" 
             alt="Total Visits" 
-            style={{ borderRadius: '4px', height: '24px' }}
-          />
-          <img 
-            src="https://komarev.com/ghpvc/?username=chaopraya-gmt-unique&color=1e40af&style=flat-square&label=UNIQUE+VISITORS" 
-            alt="Unique Visitors" 
             style={{ borderRadius: '4px', height: '24px' }}
           />
         </div>
