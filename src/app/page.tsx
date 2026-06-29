@@ -105,7 +105,7 @@ export default function Hub() {
 
         <div style={{ marginTop: '3rem', paddingBottom: '2rem', display: 'flex', justifyContent: 'center', gap: '0.5rem' }}>
           <img 
-            src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fchaopraya-gmt.com%2Ftotal&count_bg=%233b82f6&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=TOTAL+VISITS&edge_flat=true" 
+            src="https://hits.sh/chaopraya-gmt.vercel.app.svg?label=TOTAL%20VISITS&color=3b82f6" 
             alt="Total Visits" 
             style={{ borderRadius: '4px', height: '24px' }}
           />
