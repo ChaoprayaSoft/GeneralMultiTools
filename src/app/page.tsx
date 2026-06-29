@@ -103,18 +103,6 @@ export default function Hub() {
           </Link>
         </div>
 
-        <div style={{ marginTop: '3rem', paddingBottom: '2rem', display: 'flex', justifyContent: 'center', gap: '0.5rem' }}>
-          <img 
-            src="https://hits.sh/chaopraya-gmt-total.vercel.app.svg?label=TOTAL%20VISITS&color=3b82f6" 
-            alt="Total Visits" 
-            style={{ borderRadius: '4px', height: '24px' }}
-          />
-          <img 
-            src="https://hits.sh/chaopraya-gmt-unique.vercel.app.svg?label=UNIQUE%20VISITORS&color=1e40af" 
-            alt="Unique Visitors" 
-            style={{ borderRadius: '4px', height: '24px' }}
-          />
-        </div>
       </main>
     </div>
   );
