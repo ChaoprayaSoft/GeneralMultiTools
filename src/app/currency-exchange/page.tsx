@@ -29,7 +29,7 @@ export default function CurrencyExchange() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`https://api.frankfurter.app/latest?amount=1&from=${fromCurrency}&to=${toCurrency}`);
+      const response = await fetch(`https://api.frankfurter.dev/v1/latest?amount=1&from=${fromCurrency}&to=${toCurrency}`);
       if (!response.ok) throw new Error("Failed to fetch exchange rate");
       
       const data = await response.json();
