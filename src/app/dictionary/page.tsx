@@ -1,21 +1,23 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Link from 'next/link';
+import Tesseract from 'tesseract.js';
 import styles from './dictionary.module.css';
 
 interface Language {
   code: string;
   name: string;
   ttsCode: string;
+  tesseractCode: string;
 }
 
 const LANGUAGES: Language[] = [
-  { code: 'en', name: 'English', ttsCode: 'en-US' },
-  { code: 'th', name: 'Thai', ttsCode: 'th-TH' },
-  { code: 'ko', name: 'Korean', ttsCode: 'ko-KR' },
-  { code: 'ja', name: 'Japanese', ttsCode: 'ja-JP' },
-  { code: 'zh', name: 'Chinese (Simplified)', ttsCode: 'zh-CN' },
+  { code: 'en', name: 'English', ttsCode: 'en-US', tesseractCode: 'eng' },
+  { code: 'th', name: 'Thai', ttsCode: 'th-TH', tesseractCode: 'tha' },
+  { code: 'ko', name: 'Korean', ttsCode: 'ko-KR', tesseractCode: 'kor' },
+  { code: 'ja', name: 'Japanese', ttsCode: 'ja-JP', tesseractCode: 'jpn' },
+  { code: 'zh', name: 'Chinese (Simplified)', ttsCode: 'zh-CN', tesseractCode: 'chi_sim' },
 ];
 
 export default function DictionaryTranslator() {
@@ -26,14 +28,21 @@ export default function DictionaryTranslator() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleTranslate = async () => {
-    if (!sourceText.trim()) return;
+  // Camera OCR states
+  const [isCameraOpen, setIsCameraOpen] = useState<boolean>(false);
+  const [ocrLoading, setOcrLoading] = useState<boolean>(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+
+  const handleTranslate = async (textToTranslate = sourceText) => {
+    if (!textToTranslate.trim()) return;
 
     setLoading(true);
     setError(null);
     try {
       const response = await fetch(
-        `https://lingva.ml/api/v1/${sourceLang}/${targetLang}/${encodeURIComponent(sourceText)}`
+        `https://lingva.ml/api/v1/${sourceLang}/${targetLang}/${encodeURIComponent(textToTranslate)}`
       );
       if (!response.ok) throw new Error("Translation failed");
       
@@ -68,8 +77,84 @@ export default function DictionaryTranslator() {
       utterance.lang = lang.ttsCode;
     }
     
-    window.speechSynthesis.cancel(); // Stop any currently playing audio
+    window.speechSynthesis.cancel();
     window.speechSynthesis.speak(utterance);
+  };
+
+  // Camera features
+  const openCamera = async () => {
+    setIsCameraOpen(true);
+    setError(null);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        video: { facingMode: "environment" } 
+      });
+      streamRef.current = stream;
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+    } catch (err) {
+      setError("Failed to access camera. Please check permissions.");
+      console.error(err);
+      setIsCameraOpen(false);
+    }
+  };
+
+  const closeCamera = () => {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(track => track.stop());
+      streamRef.current = null;
+    }
+    setIsCameraOpen(false);
+  };
+
+  const handleCapture = async () => {
+    if (!videoRef.current || !canvasRef.current) return;
+
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    
+    // Set canvas dimensions to match video
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    
+    // Draw current frame to canvas
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    
+    // Get image data URL
+    const imageDataUrl = canvas.toDataURL('image/jpeg');
+    
+    closeCamera();
+    setOcrLoading(true);
+
+    try {
+      const lang = LANGUAGES.find(l => l.code === sourceLang);
+      const tesseractLang = lang ? lang.tesseractCode : 'eng';
+      
+      const result = await Tesseract.recognize(
+        imageDataUrl,
+        tesseractLang,
+        {
+          logger: m => console.log(m)
+        }
+      );
+      
+      const extractedText = result.data.text.trim();
+      if (extractedText) {
+        setSourceText(extractedText);
+        // Automatically translate
+        handleTranslate(extractedText);
+      } else {
+        setError("No text recognized in the image.");
+      }
+    } catch (err) {
+      setError("Failed to extract text from image.");
+      console.error(err);
+    } finally {
+      setOcrLoading(false);
+    }
   };
 
   return (
@@ -114,17 +199,33 @@ export default function DictionaryTranslator() {
         <div className={styles.panels}>
           <div className={styles.panel}>
             <div className={styles.textAreaContainer}>
+              {ocrLoading && (
+                <div className={styles.ocrLoadingOverlay}>
+                  Scanning text...
+                </div>
+              )}
               <textarea 
                 className={styles.textArea}
                 value={sourceText}
                 onChange={(e) => setSourceText(e.target.value)}
                 placeholder="Enter text to translate..."
+                disabled={ocrLoading}
               />
+              <button 
+                className={styles.cameraButton}
+                onClick={openCamera}
+                disabled={ocrLoading}
+                title="Scan text with camera"
+                type="button"
+              >
+                📸
+              </button>
               <button 
                 className={styles.audioButton}
                 onClick={() => playAudio(sourceText, sourceLang)}
-                disabled={!sourceText}
+                disabled={!sourceText || ocrLoading}
                 title="Listen to original text"
+                type="button"
               >
                 🔊
               </button>
@@ -144,6 +245,7 @@ export default function DictionaryTranslator() {
                 onClick={() => playAudio(targetText, targetLang)}
                 disabled={!targetText || loading}
                 title="Listen to translated text"
+                type="button"
               >
                 🔊
               </button>
@@ -153,12 +255,34 @@ export default function DictionaryTranslator() {
 
         <button 
           className={styles.translateButton}
-          onClick={handleTranslate}
-          disabled={loading || !sourceText.trim()}
+          onClick={() => handleTranslate(sourceText)}
+          disabled={loading || !sourceText.trim() || ocrLoading}
         >
           {loading ? "Translating..." : "Translate"}
         </button>
       </main>
+
+      {/* Camera Modal overlay */}
+      {isCameraOpen && (
+        <div className={styles.cameraModal}>
+          <video 
+            ref={videoRef} 
+            className={styles.cameraVideo}
+            autoPlay 
+            playsInline
+          />
+          <canvas ref={canvasRef} style={{ display: 'none' }} />
+          
+          <div className={styles.cameraControls}>
+            <button className={styles.captureButton} onClick={handleCapture}>
+              Capture & Read
+            </button>
+            <button className={styles.closeButton} onClick={closeCamera}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

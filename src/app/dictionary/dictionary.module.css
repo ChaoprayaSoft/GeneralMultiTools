@@ -213,3 +213,108 @@
     transform: rotate(270deg);
   }
 }
+
+.cameraButton {
+  position: absolute;
+  bottom: 1rem;
+  right: 4.5rem; /* Next to audio button */
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.cameraButton:hover {
+  background: var(--surface-hover);
+  transform: scale(1.08);
+}
+
+.cameraModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+}
+
+.cameraVideo {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  background: #000;
+  margin-bottom: 2rem;
+}
+
+.cameraControls {
+  display: flex;
+  gap: 1rem;
+}
+
+.captureButton {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  background: #10b981; /* Green */
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+.captureButton:hover {
+  background: #059669;
+  transform: scale(1.05);
+}
+
+.closeButton {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  background: #ef4444; /* Red */
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.closeButton:hover {
+  background: #dc2626;
+  transform: scale(1.05);
+}
+
+.ocrLoadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border-radius: 16px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  z-index: 10;
+}
