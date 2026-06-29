@@ -15,6 +15,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { Analytics } from '@vercel/analytics/react';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -35,6 +37,7 @@ export default function RootLayout({
         }}>
           © 2026 ChaoprayaSoft, THAILAND | Contact : tiawongsombat@gmail.com | Tel : 0909739266 | LineID : yok_tiaw
         </footer>
+        <Analytics />
       </body>
     </html>
   );
